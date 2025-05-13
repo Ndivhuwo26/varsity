@@ -1,4 +1,5 @@
-this contaoins our FNB App
-study meterials and work
-week 1 THMLS
-week 2 CSS
+This contains our FNB App  
+study materials and work:
+
+- Week 1: HTML
+- Week 2: CSS
