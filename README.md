@@ -7,3 +7,5 @@ study materials and work:
 - Week 3: UX/UI Design
 - Week 4: COMBINATION, ZOO
 - Week 5: JAVA SCRIPT JS
+
+- zoo app deployed :https://timely-sprinkles-654624.netlify.app/
