@@ -1,46 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific Calculator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <table border="1">
+    <button id="themeToggle">🌙</button>
+
+    <table>
       <tr>
         <td colspan="4">
-          <input type="text" id="inputBox" value="0" />
+          <input type="text" id="inputBox" value="0" disabled />
         </td>
       </tr>
       <tr>
-        <td onclick="digitBtnPressed(7)">7</td>
-        <td onclick="digitBtnPressed(8)">8</td>
-        <td onclick="digitBtnPressed(9)">9</td>
-        <td onclick="digitBtnPressed(x)">x</td>
+        <td onclick="press('AC')">AC</td>
+        <td onclick="press('DEL')">DEL</td>
+        <td onclick="press('%')">%</td>
+        <td onclick="press('/')">÷</td>
       </tr>
       <tr>
-        <td onclick="digitBtnPressed(4)">4</td>
-        <td onclick="digitBtnPressed(5)">5</td>
-        <td onclick="digitBtnPressed(6)">6</td>
-        <td>-</td>
+        <td onclick="press('π')">π</td>
+        <td onclick="press('sqrt')">√</td>
+        <td onclick="press('^2')">x²</td>
+        <td onclick="press('*')">×</td>
       </tr>
       <tr>
-        <td onclick="digitBtnPressed(1)">1</td>
-        <td onclick="digitBtnPressed(2)">2</td>
-        <td onclick="digitBtnPressed(3)">3</td>
-        <td onclick="digitBtnPressed(+)">+</td>
+        <td onclick="press('7')">7</td>
+        <td onclick="press('8')">8</td>
+        <td onclick="press('9')">9</td>
+        <td onclick="press('-')">−</td>
       </tr>
       <tr>
-        <td colspan="2">0</td>
-        <td onclick="digitBtnPressed(AC)">AC</td>
-        <td>/</td>
+        <td onclick="press('4')">4</td>
+        <td onclick="press('5')">5</td>
+        <td onclick="press('6')">6</td>
+        <td onclick="press('+')">+</td>
       </tr>
       <tr>
-        <td colspan="4">=</td>
+        <td onclick="press('1')">1</td>
+        <td onclick="press('2')">2</td>
+        <td onclick="press('3')">3</td>
+        <td onclick="press('^')">xʸ</td>
+      </tr>
+      <tr>
+        <td onclick="press('0')">0</td>
+        <td onclick="press('.')">.</td>
+        <td onclick="press('=')">=</td>
+        <td onclick="press('!')">n!</td>
+      </tr>
+      <tr>
+        <td onclick="press('sin')">sin</td>
+        <td onclick="press('cos')">cos</td>
+        <td onclick="press('tan')">tan</td>
+        <td onclick="press('log')">log</td>
+      </tr>
+      <tr>
+        <td onclick="press('ln')">ln</td>
+        <td colspan="3" style="text-align: center">Scientific Mode</td>
       </tr>
     </table>
+
     <script>
-      function digitBtnPressed(button) {
-        document.getElementById("inputBox").value = button;
+      let currentValue = "";
+
+      function press(btn) {
+        const inputBox = document.getElementById("inputBox");
+
+        if (btn === "AC") {
+          currentValue = "";
+          inputBox.value = "0";
+        } else if (btn === "DEL") {
+          currentValue = currentValue.slice(0, -1);
+          inputBox.value = currentValue || "0";
+        } else if (btn === "=") {
+          try {
+            let expression = currentValue
+              .replace(/π/g, Math.PI)
+              .replace(/sqrt/g, "Math.sqrt")
+              .replace(/sin\(/g, "Math.sin(")
+              .replace(/cos\(/g, "Math.cos(")
+              .replace(/tan\(/g, "Math.tan(")
+              .replace(/log\(/g, "Math.log10(")
+              .replace(/ln\(/g, "Math.log(")
+              .replace(/([0-9]+)!/g, (_, n) => factorial(Number(n)))
+              .replace(/\^/g, "**");
+
+            const result = eval(expression);
+            currentValue = result.toString();
+            inputBox.value = currentValue;
+          } catch {
+            inputBox.value = "Error";
+            currentValue = "";
+          }
+        } else if (btn === "π") {
+          currentValue += "π";
+          inputBox.value = currentValue;
+        } else if (btn === "sqrt") {
+          currentValue += "sqrt(";
+          inputBox.value = currentValue;
+        } else if (btn === "^2") {
+          currentValue += "**2";
+          inputBox.value = currentValue;
+        } else if (btn === "!") {
+          currentValue += "!";
+          inputBox.value = currentValue;
+        } else if (["sin", "cos", "tan", "log", "ln"].includes(btn)) {
+          currentValue += btn + "(";
+          inputBox.value = currentValue;
+        } else {
+          currentValue += btn;
+          inputBox.value = currentValue;
+        }
       }
+
+      function factorial(n) {
+        if (n < 0) return NaN;
+        if (n === 0 || n === 1) return 1;
+        return n * factorial(n - 1);
+      }
+
+      document.getElementById("themeToggle").onclick = () => {
+        document.body.classList.toggle("dark-mode");
+      };
     </script>
   </body>
 </html>

@@ -191,3 +191,91 @@ font-weight : 600;
 margin : 12px 0;
 padding : 8px 0;
 }
+/* ============ MEDIA QUERIES ============ */
+
+/* Small devices (phones, less than 600px) */
+@media screen and (max-width: 599px) {
+  #header img {
+    height: 50%;
+    padding-top: 10px;
+  }
+
+  #tabs-top a,
+  #tabs-bottom a {
+    font-size: 12px;
+    padding-top: 10px;
+  }
+
+  a.info-box,
+  #info-box-full {
+    width: 95%;
+  }
+
+  .info-box h3,
+  .info-box p {
+    font-size: 14px;
+  }
+
+  .info-box img {
+    height: 50px;
+    margin: 8px;
+  }
+
+  .info-box img.right {
+    margin-top: 20px;
+    height: 30px;
+  }
+
+  h1.info-box-weather-icon {
+    font-size: 40px;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+    height: 22px;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 6px 0;
+  }
+}
+
+/* Medium devices (tablets, 600px - 899px) */
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  #tabs-top a,
+  #tabs-bottom a {
+    font-size: 14px;
+    padding-top: 10px;
+  }
+
+  .info-box h3,
+  .info-box p {
+    font-size: 15px;
+  }
+
+  h1.info-box-weather-icon {
+    font-size: 50px;
+  }
+
+  .button {
+    font-size: 15px;
+  }
+}
+
+/* Large devices (small desktops, 900px and up) */
+@media screen and (min-width: 900px) {
+  body {
+    font-size: 16px;
+  }
+
+  .info-box h3,
+  .info-box p {
+    font-size: 16px;
+  }
+
+  .button {
+    font-size: 16px;
+  }
+}
